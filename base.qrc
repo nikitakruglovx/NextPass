@@ -1,0 +1,15 @@
+<RCC>
+    <qresource prefix="/new/icon">
+        <file>Resources/assets/icon/close.png</file>
+        <file>Resources/assets/icon/max.png</file>
+        <file>Resources/assets/icon/min.png</file>
+        <file>Resources/assets/icon/password.png</file>
+        <file>Resources/assets/icon/back-arrow.png</file>
+        <file>Resources/assets/icon/connect.gif</file>
+        <file>Resources/assets/icon/reg.gif</file>
+        <file>Resources/assets/icon/eye.png</file>
+        <file>Resources/assets/icon/hidden.png</file>
+        <file>Resources/assets/icon/success.gif</file>
+        <file>Resources/assets/icon/arrow-right.png</file>
+    </qresource>
+</RCC>

@@ -80,7 +80,7 @@ border-radius: 30px;</string>
 color: &quot;#30C193&quot;;</string>
        </property>
        <property name="text">
-        <string>LockPass</string>
+        <string>PassLock</string>
        </property>
       </widget>
       <widget class="QPushButton" name="createButton">
@@ -145,6 +145,7 @@ color: rgb(31, 41, 54);
       </widget>
      </widget>
     </widget>
+    <widget class="QWidget" name="page_5"/>
     <widget class="QWidget" name="page_4">
      <widget class="QFrame" name="frame_5">
       <property name="geometry">
@@ -454,7 +455,7 @@ border-radius: 30px;</string>
       <property name="frameShadow">
        <enum>QFrame::Raised</enum>
       </property>
-      <widget class="QLineEdit" name="lineEdit">
+      <widget class="QLineEdit" name="idEdit">
        <property name="geometry">
         <rect>
          <x>60</x>
@@ -475,6 +476,9 @@ color: &quot;#30C193&quot;;</string>
        <property name="text">
         <string/>
        </property>
+       <property name="maxLength">
+        <number>8</number>
+       </property>
        <property name="cursorPosition">
         <number>0</number>
        </property>
@@ -482,7 +486,7 @@ color: &quot;#30C193&quot;;</string>
         <string> ID</string>
        </property>
       </widget>
-      <widget class="QLineEdit" name="lineEdit_2">
+      <widget class="QLineEdit" name="passEdit">
        <property name="geometry">
         <rect>
          <x>60</x>
@@ -496,6 +500,12 @@ color: &quot;#30C193&quot;;</string>
 border-radius: 14px;
 font: 18pt &quot;Nirmala UI&quot;;
 color: &quot;#30C193&quot;;</string>
+       </property>
+       <property name="maxLength">
+        <number>19</number>
+       </property>
+       <property name="echoMode">
+        <enum>QLineEdit::Password</enum>
        </property>
        <property name="placeholderText">
         <string> Password</string>
@@ -539,6 +549,63 @@ color: rgb(31, 41, 54);
         <string/>
        </property>
        <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="copyidButton">
+       <property name="geometry">
+        <rect>
+         <x>360</x>
+         <y>230</y>
+         <width>41</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">#copyidButton {
+border: none;
+color: &quot;#30C193&quot;;
+font: 700 12pt &quot;Nirmala UI&quot;;
+}
+</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="base.qrc">
+         <normaloff>:/new/icon/Resources/assets/icon/copy.png</normaloff>:/new/icon/Resources/assets/icon/copy.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>19</width>
+         <height>19</height>
+        </size>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="hideandseeButton_2">
+       <property name="geometry">
+        <rect>
+         <x>360</x>
+         <y>300</y>
+         <width>41</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="base.qrc">
+         <normaloff>:/new/icon/Resources/assets/icon/hidden.png</normaloff>:/new/icon/Resources/assets/icon/hidden.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>20</width>
+         <height>20</height>
+        </size>
+       </property>
+       <property name="checkable">
         <bool>true</bool>
        </property>
       </widget>

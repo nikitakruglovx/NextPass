@@ -10,6 +10,9 @@
 #include <iostream>
 #include <fstream>
 #include <QFileInfo>
+#include <QFile>
+#include <QClipboard>
+
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -27,12 +30,6 @@ MainWindow::MainWindow(QWidget *parent)
     db.setHostName(DB_HOST);
     db.setPort(DB_PORT);
     db.setPassword(DB_PASSWORD);
-    if(!db.open()) {
-        qDebug() << "Error";
-    }
-    else {
-        qDebug() << "Success connect";
-    }
 
 }
 
@@ -63,12 +60,23 @@ void MainWindow::on_minimizeButton_clicked() {
 }
 
 void MainWindow::on_loginButton_clicked() {
-    ui->stackedWidget->setCurrentIndex(3);
-    QMovie *pic = new QMovie(":/new/icon/Resources/assets/icon/connect.gif");
+    ui->stackedWidget->setCurrentIndex(4);
     ui->label_3->setMovie(pic);
     ui->label_3->setAlignment(Qt::AlignCenter);
     ui->label_3->setGeometry(150, 10, 200, 200);
     pic->start();
+    QFileInfo load_profile(PROFILEPATH);
+    QFile f(PROFILEPATH);
+    if(load_profile.exists() && load_profile.isFile()) {
+        f.open(QIODevice::ReadOnly | QIODevice::Text);
+        QString val;
+        val = f.readAll();
+        f.close();
+        QJsonDocument doc = QJsonDocument::fromJson(val.toUtf8());
+        QJsonObject json = doc.object();
+        QString load_id = json["id"].toString();
+        ui->idEdit->setText(load_id);
+    }
 }
 
 void MainWindow::on_backtohomeButton_clicked() {
@@ -80,13 +88,12 @@ void MainWindow::on_backtohomeButton2_clicked() {
 }
 
 void MainWindow::on_createButton_clicked() {
-    ui->stackedWidget->setCurrentIndex(2);
+    ui->stackedWidget->setCurrentIndex(3);
     generationId();
-    QMovie *pic = new QMovie(":/new/icon/Resources/assets/icon/reg.gif");
-    ui->label_4->setMovie(pic);
+    ui->label_4->setMovie(pic_2);
     ui->label_4->setAlignment(Qt::AlignCenter);
     ui->label_4->setGeometry(150, 10, 200, 200);
-    pic->start();
+    pic_2->start();
 }
 
 void MainWindow::on_hideandseeButton_clicked() {
@@ -99,6 +106,17 @@ void MainWindow::on_hideandseeButton_clicked() {
         ui->createPassword->setEchoMode(QLineEdit::Normal);
         ui->createrePassword->setEchoMode(QLineEdit::Normal);
         ui->hideandseeButton->setIcon(QIcon(":/new/icon/Resources/assets/icon/eye.png"));
+    }
+}
+
+void MainWindow::on_hideandseeButton_2_clicked() {
+    if (ui->hideandseeButton_2->isChecked()) {
+        ui->passEdit->setEchoMode(QLineEdit::Normal);
+        ui->hideandseeButton_2->setIcon(QIcon(":/new/icon/Resources/assets/icon/eye.png"));
+    }
+    else {
+        ui->passEdit->setEchoMode(QLineEdit::Password);
+        ui->hideandseeButton_2->setIcon(QIcon(":/new/icon/Resources/assets/icon/hidden.png"));
     }
 }
 
@@ -116,9 +134,10 @@ void MainWindow::create(int int_id) {
     QByteArray passByte = passValue.toUtf8();
     QString hashedPass = QCryptographicHash::hash(passByte, QCryptographicHash::Sha256).toHex();
     QSqlQuery query;
-    query.bindValue(":ID", id);
-    query.bindValue(":PASSWORD", hashedPass);
-    query.exec("INSERT INTO Users(ID, PASSWORD)VALUES(:ID, :PASSWORD)");
+    query.prepare("INSERT INTO users(id, password)VALUES(:id, :password);");
+    query.bindValue(":id", id);
+    query.bindValue(":password", hashedPass);
+    query.exec();
     conf_obj.insert("id", QJsonValue::fromVariant(id));
     qDebug() << id;
     QJsonDocument doc(conf_obj);
@@ -154,19 +173,23 @@ void MainWindow::on_creatingButton_clicked() {
                     int id = generationId();
                     QSqlQuery query;
                     QString query_id = QString::number(id);
-                    query.exec("SELECT * FROM Users WHERE ID =\"" + query_id + "\"");
+                    query.exec("SELECT * FROM users WHERE ID =\"" + query_id + "\"");
                     if (query.next() == false) {
                         create(id);
-                        QMovie *pic = new QMovie(":/new/icon/Resources/assets/icon/success.gif");
-                        ui->label_8->setMovie(pic);
+                        ui->label_8->setMovie(pic_success);
                         ui->label_8->setAlignment(Qt::AlignCenter);
                         ui->label_8->setGeometry(150, 10, 200, 200);
-                        pic->start();
-                        ui->stackedWidget->setCurrentIndex(1);
-                        ui->label_9->setText("Creating success!");
+                        pic_success->start();
+                        QTimer::singleShot(1000, [this] ()
+                        {
+                            ui->stackedWidget->setCurrentIndex(2);
+                            ui->label_9->setText("Creating success!");
+                        });
                     }
                     else {
                         while (query.next() == false) {
+                            id = generationId();
+                            break;
                             create(id);
                         }
                     }
@@ -183,11 +206,91 @@ void MainWindow::on_creatingButton_clicked() {
     }
 }
 
+void MainWindow::systemLogin() {
+    if (ui->idEdit->text() == "" || ui->passEdit->text() == "") {
+        ui->idEdit->setStyleSheet("border: 1px solid rgb(255, 74, 92); border-radius: 14px; font: 18pt 'Nirmala UI'; color: rgb(255, 74, 92);");
+        ui->passEdit->setStyleSheet("border: 1px solid rgb(255, 74, 92); border-radius: 14px; font: 18pt 'Nirmala UI'; color: rgb(255, 74, 92);");
+        QTimer::singleShot(3000, [this] ()
+        {
+            ui->idEdit->setStyleSheet("border: 1px solid '#30C193'; border-radius: 14px; font: 18pt 'Nirmala UI'; color: '#30C193';");
+            ui->passEdit->setStyleSheet("border: 1px solid '#30C193'; border-radius: 14px; font: 18pt 'Nirmala UI'; color: '#30C193';");
+        });
+
+    }
+    else {
+        QSqlQuery query;
+        QString passValue = ui->passEdit->text();
+        QByteArray passByte = passValue.toUtf8();
+        QString HDpass_value = QCryptographicHash::hash(passByte, QCryptographicHash::Sha256).toHex();
+        QString id = ui->idEdit->text();
+        if (!query.exec("SELECT password FROM users WHERE id =\'"+id+"\'")) {
+            qDebug() << query.lastError();
+        }
+        else {
+            while (query.next()) {
+                QString pass_value = query.value(0).toString();
+                qDebug() << HDpass_value;
+                qDebug() << pass_value;
+                if (HDpass_value != pass_value) {
+                    ui->passEdit->setStyleSheet("border: 1px solid rgb(255, 74, 92); border-radius: 14px; font: 18pt 'Nirmala UI'; color: rgb(255, 74, 92);");
+                    QTimer::singleShot(3000, [this] ()
+                    {
+                        ui->idEdit->setStyleSheet("border: 1px solid '#30C193'; border-radius: 14px; font: 18pt 'Nirmala UI'; color: '#30C193';");
+                        ui->passEdit->setStyleSheet("border: 1px solid '#30C193'; border-radius: 14px; font: 18pt 'Nirmala UI'; color: '#30C193';");
+                    });
+                }
+                else {
+                    delete pic;
+                    delete pic_2;
+                    delete pic_success;
+                    this->close();
+                    home_window->show();
+                }
+                break;
+            }
+        }
+    }
+}
+
 void MainWindow::on_GoButton_clicked() {
-    QMovie *pic = new QMovie(":/new/icon/Resources/assets/icon/connect.gif");
     ui->label_3->setMovie(pic);
     ui->label_3->setAlignment(Qt::AlignCenter);
     ui->label_3->setGeometry(150, 10, 200, 200);
     pic->start();
-    ui->stackedWidget->setCurrentIndex(3);
+    ui->stackedWidget->setCurrentIndex(4);
+    QFileInfo load_profile(PROFILEPATH);
+    QFile f(PROFILEPATH);
+    if(load_profile.exists() && load_profile.isFile()) {
+        f.open(QIODevice::ReadOnly | QIODevice::Text);
+        QString val;
+        val = f.readAll();
+        f.close();
+        QJsonDocument doc = QJsonDocument::fromJson(val.toUtf8());
+        QJsonObject json = doc.object();
+        QString load_id = json["id"].toString();
+        ui->idEdit->setText(load_id);
+    }
 }
+
+void MainWindow::on_copyidButton_clicked() {
+    QString id = ui->idEdit->text();
+    QApplication::clipboard()->setText(id);
+    ui->idEdit->setText("Copied!");
+    QTimer::singleShot(1000, [id, this] (){
+        ui->idEdit->setText(id);
+    });
+}
+
+void MainWindow::on_loginingButton_clicked() {
+    systemLogin();
+}
+
+void MainWindow::on_passEdit_returnPressed() {
+    systemLogin();
+}
+
+void MainWindow::on_idEdit_returnPressed() {
+    systemLogin();
+}
+
+

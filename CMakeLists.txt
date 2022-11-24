@@ -19,6 +19,12 @@ set(PROJECT_SOURCES
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
+        passcontroll.cpp
+        passcontroll.h
+        passcontroll.ui
+        errorwindow.cpp
+        errorwindow.h
+        errorwindow.ui
         base.qrc
 )
 

@@ -1,5 +1,6 @@
-#include "mainwindow.h"
-#include "./ui_mainwindow.h"
+#include "MainWindow.h"
+#include "ui_mainwindow.h"
+#include "DataBase.h"
 
 #include <QMovie>
 #include <random>
@@ -18,18 +19,19 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
+    , datas(new data::DataCon)
 {
     ui->setupUi(this);
     setObjectName("borderframeless");
     setWindowFlags(Qt::FramelessWindowHint| Qt::WindowSystemMenuHint);
     setWindowFlags(windowFlags() | Qt::WindowMinimizeButtonHint);
 
-    db = QSqlDatabase::addDatabase(DBMS);
-    db.setDatabaseName(DB_NAME);
-    db.setUserName(DB_USERNAME);
-    db.setHostName(DB_HOST);
-    db.setPort(DB_PORT);
-    db.setPassword(DB_PASSWORD);
+    db = QSqlDatabase::addDatabase(datas->DBMS);
+    db.setDatabaseName(datas->DB_NAME);
+    db.setUserName(datas->DB_USERNAME);
+    db.setHostName(datas->DB_HOST);
+    db.setPort(datas->DB_PORT);
+    db.setPassword(datas->DB_PASSWORD);
 
 }
 
@@ -134,9 +136,9 @@ void MainWindow::create(int int_id) {
     QByteArray passByte = passValue.toUtf8();
     QString hashedPass = QCryptographicHash::hash(passByte, QCryptographicHash::Sha256).toHex();
     QSqlQuery query;
-    query.prepare("INSERT INTO users(id, password)VALUES(:id, :password);");
-    query.bindValue(":id", id);
-    query.bindValue(":password", hashedPass);
+    query.prepare("INSERT INTO users(user_id, user_password)VALUES(:user_id, :user_password);");
+    query.bindValue(":user_id", id);
+    query.bindValue(":user_password", hashedPass);
     query.exec();
     conf_obj.insert("id", QJsonValue::fromVariant(id));
     qDebug() << id;
@@ -173,7 +175,7 @@ void MainWindow::on_creatingButton_clicked() {
                     int id = generationId();
                     QSqlQuery query;
                     QString query_id = QString::number(id);
-                    query.exec("SELECT * FROM users WHERE ID =\"" + query_id + "\"");
+                    query.exec("SELECT * FROM users WHERE user_id =\"" + query_id + "\"");
                     if (query.next() == false) {
                         create(id);
                         ui->label_8->setMovie(pic_success);
@@ -223,14 +225,14 @@ void MainWindow::systemLogin() {
         QByteArray passByte = passValue.toUtf8();
         QString HDpass_value = QCryptographicHash::hash(passByte, QCryptographicHash::Sha256).toHex();
         QString id = ui->idEdit->text();
-        if (!query.exec("SELECT password FROM users WHERE id =\'"+id+"\'")) {
+
+        if (!query.exec("SELECT user_password FROM users WHERE user_id =\'"+id+"\'")) {
             qDebug() << query.lastError();
         }
         else {
             while (query.next()) {
                 QString pass_value = query.value(0).toString();
-                qDebug() << HDpass_value;
-                qDebug() << pass_value;
+
                 if (HDpass_value != pass_value) {
                     ui->passEdit->setStyleSheet("border: 1px solid rgb(255, 74, 92); border-radius: 14px; font: 18pt 'Nirmala UI'; color: rgb(255, 74, 92);");
                     QTimer::singleShot(3000, [this] ()
@@ -240,11 +242,22 @@ void MainWindow::systemLogin() {
                     });
                 }
                 else {
-                    delete pic;
-                    delete pic_2;
-                    delete pic_success;
+                    conf_obj.insert("id", QJsonValue::fromVariant(id));
+                    QJsonDocument doc(conf_obj);
+                    QString jsonString = doc.toJson(QJsonDocument::Indented);
+                    jsonfile.setFileName(PROFILEPATH);
+                    jsonfile.open(QIODevice::WriteOnly | QIODevice::Text);
+                    QTextStream stream( &jsonfile );
+                    stream << jsonString;
+                    jsonfile.close();
+
+                    pic->deleteLater();
+                    pic_2->deleteLater();
+                    pic_success->deleteLater();
+
                     this->close();
-                    home_window->show();
+                    homeWindow->show();
+
                 }
                 break;
             }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>passcontroll</class>
- <widget class="QWidget" name="passcontroll">
+ <class>PassControll</class>
+ <widget class="QWidget" name="PassControll">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -17,7 +17,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>VivaPassLock</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: rgb(23, 33, 43);</string>
@@ -105,6 +105,1463 @@ border: none;
      <iconset resource="base.qrc">
       <normaloff>:/new/icon/Resources/assets/icon/close.png</normaloff>:/new/icon/Resources/assets/icon/close.png</iconset>
     </property>
+   </widget>
+  </widget>
+  <widget class="QStackedWidget" name="stackedWidget">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>30</y>
+     <width>1101</width>
+     <height>621</height>
+    </rect>
+   </property>
+   <property name="currentIndex">
+    <number>1</number>
+   </property>
+   <widget class="QWidget" name="page">
+    <widget class="QFrame" name="frame_2">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>1101</width>
+       <height>621</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(31, 41, 54);</string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <widget class="QLineEdit" name="passEdit">
+      <property name="geometry">
+       <rect>
+        <x>370</x>
+        <y>330</y>
+        <width>351</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border: 1px solid &quot;#30C193&quot;;
+border-radius: 14px;
+font: 18pt &quot;Nirmala UI&quot;;
+color: &quot;#30C193&quot;;</string>
+      </property>
+      <property name="maxLength">
+       <number>19</number>
+      </property>
+      <property name="echoMode">
+       <enum>QLineEdit::Password</enum>
+      </property>
+      <property name="placeholderText">
+       <string> Password</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>460</x>
+        <y>140</y>
+        <width>171</width>
+        <height>151</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap resource="base.qrc">:/new/icon/Resources/assets/icon/password.png</pixmap>
+      </property>
+      <property name="scaledContents">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="hideandseeButton">
+      <property name="geometry">
+       <rect>
+        <x>670</x>
+        <y>340</y>
+        <width>41</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border: none;</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset resource="base.qrc">
+        <normaloff>:/new/icon/Resources/assets/icon/hidden.png</normaloff>:/new/icon/Resources/assets/icon/hidden.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>20</width>
+        <height>20</height>
+       </size>
+      </property>
+      <property name="checkable">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="page_2">
+    <widget class="QFrame" name="frame_3">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>261</width>
+       <height>621</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(31, 41, 54);</string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <widget class="QPushButton" name="passwordsButton">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>40</y>
+        <width>231</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">#passwordsButton {
+background-color: rgb(23, 33, 43);
+border: 1px solid rgb(23, 33, 43);
+border-radius: 13px;
+color: rgb(141, 151, 173);
+font: 700 12pt &quot;Nirmala UI&quot;;
+}
+</string>
+      </property>
+      <property name="text">
+       <string> Passwords</string>
+      </property>
+      <property name="icon">
+       <iconset resource="base.qrc">
+        <normaloff>:/new/userskey/Resources/assets/userkey/key.png</normaloff>:/new/userskey/Resources/assets/userkey/key.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>20</width>
+        <height>20</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_5">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>0</y>
+        <width>251</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 700 14pt &quot;Nirmala UI&quot;;
+color: rgb(141, 151, 173);</string>
+      </property>
+      <property name="text">
+       <string>Pages</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="notesButton">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>110</y>
+        <width>231</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">#notesButton {
+background-color: rgb(31, 41, 54);
+border: none;
+color: rgb(141, 151, 173);
+font: 700 12pt &quot;Nirmala UI&quot;;
+}
+#notesButton:hover {
+background-color: rgb(23, 33, 43);
+border: 1px solid rgb(23, 33, 43);
+border-radius: 13px;
+}</string>
+      </property>
+      <property name="text">
+       <string> Notes</string>
+      </property>
+      <property name="icon">
+       <iconset resource="base.qrc">
+        <normaloff>:/new/userskey/Resources/assets/userkey/sticky-note.png</normaloff>:/new/userskey/Resources/assets/userkey/sticky-note.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>20</width>
+        <height>20</height>
+       </size>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QStackedWidget" name="stackedWidget_2">
+     <property name="geometry">
+      <rect>
+       <x>260</x>
+       <y>0</y>
+       <width>841</width>
+       <height>611</height>
+      </rect>
+     </property>
+     <widget class="QWidget" name="page_3">
+      <widget class="QFrame" name="frame_4">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>291</width>
+         <height>621</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::Box</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <widget class="QPushButton" name="addItemButton">
+        <property name="geometry">
+         <rect>
+          <x>240</x>
+          <y>10</y>
+          <width>41</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">#addItemButton {
+border: none;
+border-radius: 25px;
+color: &quot;#30C193&quot;;
+font: 700 12pt &quot;Nirmala UI&quot;;
+}
+#addItemButton:hover {
+color: rgb(31, 41, 54);
+}</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="base.qrc">
+          <normaloff>:/new/icon/Resources/assets/icon/plus.png</normaloff>:/new/icon/Resources/assets/icon/plus.png</iconset>
+        </property>
+       </widget>
+       <widget class="QListWidget" name="listWidget">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>60</y>
+          <width>281</width>
+          <height>551</height>
+         </rect>
+        </property>
+        <property name="focusPolicy">
+         <enum>Qt::NoFocus</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QListWidget {
+     color: #FFFFFF;
+border: 1px solid rgb(23, 33, 43);
+border-radius: 13px;
+color: rgb(141, 151, 173);
+font: 700 12pt &quot;Nirmala UI&quot;;
+ }
+ 
+ QListWidget::item {
+     height: 50px;
+border: 1px solid rgb(23, 33, 43);
+border-radius: 13px;
+color: rgb(141, 151, 173);
+font: 700 12pt &quot;Nirmala UI&quot;;
+ }
+ 
+QListWidget::item:selected {
+    background-color: rgb(31, 41, 54);
+border: 1px solid rgb(23, 33, 43);
+border-radius: 13px;
+color: rgb(141, 151, 173);
+font: 700 12pt &quot;Nirmala UI&quot;;
+}
+
+QScrollBar:vertical {
+	border: none;
+    background: rgb(45, 45, 68);
+    width: 14px;
+    margin: 15px 0 15px 0;
+	border-radius: 0px;
+ }
+
+QScrollBar::handle:vertical {	
+	background-color: rgb(80, 80, 122);
+	min-height: 30px;
+	border-radius: 7px;
+}
+QScrollBar::handle:vertical:hover{	
+	background-color: rgb(141, 151, 173);
+}
+QScrollBar::handle:vertical:pressed {	
+	background-color: rgb(104, 153, 252);
+}
+
+/* BTN TOP - SCROLLBAR */
+QScrollBar::sub-line:vertical {
+	border: none;
+	background-color: rgb(59, 59, 90);
+	height: 15px;
+	border-top-left-radius: 7px;
+	border-top-right-radius: 7px;
+	subcontrol-position: top;
+	subcontrol-origin: margin;
+}
+QScrollBar::sub-line:vertical:hover {	
+	background-color: rgb(141, 151, 173);
+}
+QScrollBar::sub-line:vertical:pressed {	
+	background-color: rgb(104, 153, 252);
+}
+
+/* BTN BOTTOM - SCROLLBAR */
+QScrollBar::add-line:vertical {
+	border: none;
+	background-color: rgb(59, 59, 90);
+	height: 15px;
+	border-bottom-left-radius: 7px;
+	border-bottom-right-radius: 7px;
+	subcontrol-position: bottom;
+	subcontrol-origin: margin;
+}
+QScrollBar::add-line:vertical:hover {	
+	background-color: rgb(141, 151, 173);
+}
+QScrollBar::add-line:vertical:pressed {	
+	background-color: rgb(104, 153, 252);
+}
+
+/* RESET ARROW */
+QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {
+	background: none;
+}
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+	background: none;
+}
+
+
+
+/* HORIZONTAL SCROLLBAR - HOMEWORK */
+QScrollBar:horizontal {
+   
+}
+QScrollBar::handle:horizontal {
+    
+}
+QScrollBar::add-line:horizontal {
+    
+}
+QScrollBar::sub-line:horizontal {
+    
+}
+QScrollBar::up-arrow:horizontal, QScrollBar::down-arrow:horizontal
+{
+
+}
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal
+{
+
+}
+</string>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::NoFrame</enum>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="lineEdit">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>10</y>
+          <width>221</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border: 1px solid rgb(104, 153, 252);
+border-radius: 4px;
+font: 12pt &quot;Nirmala UI&quot;;
+color: rgb(104, 153, 252);</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="maxLength">
+         <number>18</number>
+        </property>
+        <property name="placeholderText">
+         <string>All Items password</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_2">
+        <property name="geometry">
+         <rect>
+          <x>200</x>
+          <y>16</y>
+          <width>21</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="base.qrc">:/new/userskey/Resources/assets/userkey/magnifying-glass.png</pixmap>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QFrame" name="frame_5">
+       <property name="geometry">
+        <rect>
+         <x>290</x>
+         <y>0</y>
+         <width>551</width>
+         <height>621</height>
+        </rect>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::Box</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <widget class="QStackedWidget" name="stackedWidget_3">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>9</y>
+          <width>531</width>
+          <height>601</height>
+         </rect>
+        </property>
+        <property name="currentIndex">
+         <number>0</number>
+        </property>
+        <widget class="QWidget" name="page_5">
+         <widget class="QLabel" name="label_6">
+          <property name="geometry">
+           <rect>
+            <x>160</x>
+            <y>280</y>
+            <width>231</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">font: 700 14pt &quot;Nirmala UI&quot;;
+color: rgb(141, 151, 173);</string>
+          </property>
+          <property name="text">
+           <string>Select item to view</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_4">
+          <property name="geometry">
+           <rect>
+            <x>340</x>
+            <y>280</y>
+            <width>31</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="pixmap">
+           <pixmap resource="base.qrc">:/new/userskey/Resources/assets/userkey/view.png</pixmap>
+          </property>
+          <property name="scaledContents">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="page_9">
+         <widget class="QLabel" name="label_12">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>30</y>
+            <width>41</width>
+            <height>41</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="pixmap">
+           <pixmap resource="base.qrc">:/new/userskey/Resources/assets/userkey/key2.png</pixmap>
+          </property>
+          <property name="scaledContents">
+           <bool>false</bool>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="Titleedit_2">
+          <property name="geometry">
+           <rect>
+            <x>70</x>
+            <y>30</y>
+            <width>371</width>
+            <height>41</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">border: 1.5px solid &quot;#30C193&quot;;
+border-radius: 8px;
+font: 18pt &quot;Nirmala UI&quot;;
+color: &quot;#30C193&quot;;</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="maxLength">
+           <number>30</number>
+          </property>
+          <property name="placeholderText">
+           <string>Title</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_13">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>100</y>
+            <width>71</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">font: 11pt &quot;Nirmala UI&quot;;
+color: rgb(141, 151, 173);</string>
+          </property>
+          <property name="text">
+           <string>Username</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="UsernameEdit_2">
+          <property name="geometry">
+           <rect>
+            <x>100</x>
+            <y>100</y>
+            <width>361</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">#UsernameEdit_2 {
+border: none;
+font: 13pt &quot;Nirmala UI&quot;;
+color: &quot;#30C193&quot;;
+}
+#UsernameEdit_2:hover {
+border: 1px solid &quot;#30C193&quot;;
+border-radius: 5px;
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="maxLength">
+           <number>100</number>
+          </property>
+          <property name="placeholderText">
+           <string/>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_14">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>150</y>
+            <width>71</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">font: 11pt &quot;Nirmala UI&quot;;
+color: rgb(141, 151, 173);</string>
+          </property>
+          <property name="text">
+           <string>Password</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="PasswordEdit_2">
+          <property name="geometry">
+           <rect>
+            <x>100</x>
+            <y>150</y>
+            <width>361</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">#PasswordEdit_2 {
+border: none;
+font: 13pt &quot;Nirmala UI&quot;;
+color: &quot;#30C193&quot;;
+}
+#PasswordEdit_2:hover {
+border: 1px solid &quot;#30C193&quot;;
+border-radius: 5px;
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="maxLength">
+           <number>100</number>
+          </property>
+          <property name="echoMode">
+           <enum>QLineEdit::Password</enum>
+          </property>
+          <property name="placeholderText">
+           <string/>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_15">
+          <property name="geometry">
+           <rect>
+            <x>30</x>
+            <y>200</y>
+            <width>61</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">font: 11pt &quot;Nirmala UI&quot;;
+color: rgb(141, 151, 173);</string>
+          </property>
+          <property name="text">
+           <string>Link url</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="LinkUrlEdit_2">
+          <property name="geometry">
+           <rect>
+            <x>100</x>
+            <y>200</y>
+            <width>361</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">#LinkUrlEdit_2 {
+border: none;
+font: 13pt &quot;Nirmala UI&quot;;
+color: &quot;#30C193&quot;;
+}
+#LinkUrlEdit_2:hover {
+border: 1px solid &quot;#30C193&quot;;
+border-radius: 5px;
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="maxLength">
+           <number>300</number>
+          </property>
+          <property name="echoMode">
+           <enum>QLineEdit::Normal</enum>
+          </property>
+          <property name="placeholderText">
+           <string/>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_16">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>250</y>
+            <width>71</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">font: 11pt &quot;Nirmala UI&quot;;
+color: rgb(141, 151, 173);</string>
+          </property>
+          <property name="text">
+           <string>Signature</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="signEdit_2">
+          <property name="geometry">
+           <rect>
+            <x>100</x>
+            <y>250</y>
+            <width>361</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">#signEdit_2 {
+border: none;
+font: 13pt &quot;Nirmala UI&quot;;
+color: &quot;#30C193&quot;;
+}
+#signEdit_2:hover {
+border: 1px solid &quot;#30C193&quot;;
+border-radius: 5px;
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="maxLength">
+           <number>30</number>
+          </property>
+          <property name="echoMode">
+           <enum>QLineEdit::Normal</enum>
+          </property>
+          <property name="placeholderText">
+           <string/>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="updateButton">
+          <property name="geometry">
+           <rect>
+            <x>380</x>
+            <y>540</y>
+            <width>131</width>
+            <height>41</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">#updateButton {
+border: 1.5px solid &quot;#30C193&quot;;
+border-radius: 8px;
+color: &quot;#30C193&quot;;
+font: 700 12pt &quot;Nirmala UI&quot;;
+}
+#updateButton:hover {
+background-color: &quot;#30C193&quot;;
+color: rgb(31, 41, 54);
+}</string>
+          </property>
+          <property name="text">
+           <string>Update</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="hideandseeButton_2">
+          <property name="geometry">
+           <rect>
+            <x>470</x>
+            <y>150</y>
+            <width>41</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">border: none;</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="base.qrc">
+            <normaloff>:/new/icon/Resources/assets/icon/eye.png</normaloff>:/new/icon/Resources/assets/icon/eye.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>20</width>
+            <height>20</height>
+           </size>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="deleteButton">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>540</y>
+            <width>71</width>
+            <height>41</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">#deleteButton {
+border: 1.5px solid rgb(224, 79, 95);
+border-radius: 8px;
+color: rgb(224, 79, 95);
+font: 700 12pt &quot;Nirmala UI&quot;;
+}
+</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="base.qrc">
+            <normaloff>:/new/userskey/Resources/assets/userkey/trash.png</normaloff>:/new/userskey/Resources/assets/userkey/trash.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>20</width>
+            <height>20</height>
+           </size>
+          </property>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="page_6">
+         <widget class="QLineEdit" name="Titleedit">
+          <property name="geometry">
+           <rect>
+            <x>70</x>
+            <y>30</y>
+            <width>371</width>
+            <height>41</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">border: 1.5px solid &quot;#30C193&quot;;
+border-radius: 8px;
+font: 18pt &quot;Nirmala UI&quot;;
+color: &quot;#30C193&quot;;</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="maxLength">
+           <number>30</number>
+          </property>
+          <property name="placeholderText">
+           <string>Title</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_7">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>30</y>
+            <width>41</width>
+            <height>41</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="pixmap">
+           <pixmap resource="base.qrc">:/new/userskey/Resources/assets/userkey/key2.png</pixmap>
+          </property>
+          <property name="scaledContents">
+           <bool>false</bool>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="UsernameEdit">
+          <property name="geometry">
+           <rect>
+            <x>100</x>
+            <y>100</y>
+            <width>361</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">#UsernameEdit {
+border: none;
+font: 13pt &quot;Nirmala UI&quot;;
+color: &quot;#30C193&quot;;
+}
+#UsernameEdit:hover {
+border: 1px solid &quot;#30C193&quot;;
+border-radius: 5px;
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="maxLength">
+           <number>100</number>
+          </property>
+          <property name="placeholderText">
+           <string/>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_8">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>100</y>
+            <width>71</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">font: 11pt &quot;Nirmala UI&quot;;
+color: rgb(141, 151, 173);</string>
+          </property>
+          <property name="text">
+           <string>Username</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_9">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>150</y>
+            <width>71</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">font: 11pt &quot;Nirmala UI&quot;;
+color: rgb(141, 151, 173);</string>
+          </property>
+          <property name="text">
+           <string>Password</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="PasswordEdit">
+          <property name="geometry">
+           <rect>
+            <x>100</x>
+            <y>150</y>
+            <width>361</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">#PasswordEdit {
+border: none;
+font: 13pt &quot;Nirmala UI&quot;;
+color: &quot;#30C193&quot;;
+}
+#PasswordEdit:hover {
+border: 1px solid &quot;#30C193&quot;;
+border-radius: 5px;
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="maxLength">
+           <number>100</number>
+          </property>
+          <property name="echoMode">
+           <enum>QLineEdit::Password</enum>
+          </property>
+          <property name="placeholderText">
+           <string/>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_10">
+          <property name="geometry">
+           <rect>
+            <x>30</x>
+            <y>200</y>
+            <width>61</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">font: 11pt &quot;Nirmala UI&quot;;
+color: rgb(141, 151, 173);</string>
+          </property>
+          <property name="text">
+           <string>Link url</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="LinkUrlEdit">
+          <property name="geometry">
+           <rect>
+            <x>100</x>
+            <y>200</y>
+            <width>361</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">#LinkUrlEdit {
+border: none;
+font: 13pt &quot;Nirmala UI&quot;;
+color: &quot;#30C193&quot;;
+}
+#LinkUrlEdit:hover {
+border: 1px solid &quot;#30C193&quot;;
+border-radius: 5px;
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="maxLength">
+           <number>300</number>
+          </property>
+          <property name="echoMode">
+           <enum>QLineEdit::Normal</enum>
+          </property>
+          <property name="placeholderText">
+           <string/>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_11">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>250</y>
+            <width>71</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">font: 11pt &quot;Nirmala UI&quot;;
+color: rgb(141, 151, 173);</string>
+          </property>
+          <property name="text">
+           <string>Signature</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="signEdit">
+          <property name="geometry">
+           <rect>
+            <x>100</x>
+            <y>250</y>
+            <width>361</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">#signEdit {
+border: none;
+font: 13pt &quot;Nirmala UI&quot;;
+color: &quot;#30C193&quot;;
+}
+#signEdit:hover {
+border: 1px solid &quot;#30C193&quot;;
+border-radius: 5px;
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="maxLength">
+           <number>30</number>
+          </property>
+          <property name="echoMode">
+           <enum>QLineEdit::Normal</enum>
+          </property>
+          <property name="placeholderText">
+           <string/>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="addsaveButton">
+          <property name="geometry">
+           <rect>
+            <x>380</x>
+            <y>540</y>
+            <width>131</width>
+            <height>41</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">#addsaveButton {
+border: 1.5px solid &quot;#30C193&quot;;
+border-radius: 8px;
+color: &quot;#30C193&quot;;
+font: 700 12pt &quot;Nirmala UI&quot;;
+}
+#addsaveButton:hover {
+background-color: &quot;#30C193&quot;;
+color: rgb(31, 41, 54);
+}</string>
+          </property>
+          <property name="text">
+           <string>Add and Save</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="clearButton">
+          <property name="geometry">
+           <rect>
+            <x>250</x>
+            <y>540</y>
+            <width>111</width>
+            <height>41</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">#clearButton {
+border: 1.5px solid rgb(224, 79, 95);
+border-radius: 8px;
+color: rgb(224, 79, 95);
+font: 700 12pt &quot;Nirmala UI&quot;;
+}
+#clearButton:hover {
+background-color: rgb(224, 79, 95);
+color: rgb(31, 41, 54);
+}</string>
+          </property>
+          <property name="text">
+           <string>Delete</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_17">
+          <property name="geometry">
+           <rect>
+            <x>110</x>
+            <y>390</y>
+            <width>321</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(224, 79, 95);
+font: 700 12pt &quot;Nirmala UI&quot;;</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="hideandseeButton_3">
+          <property name="geometry">
+           <rect>
+            <x>470</x>
+            <y>150</y>
+            <width>41</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">border: none;</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="base.qrc">
+            <normaloff>:/new/icon/Resources/assets/icon/eye.png</normaloff>:/new/icon/Resources/assets/icon/eye.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>20</width>
+            <height>20</height>
+           </size>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </widget>
+       </widget>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="page_4">
+      <widget class="QFrame" name="frame_6">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>291</width>
+         <height>621</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::Box</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <widget class="QPushButton" name="addNotesButton">
+        <property name="geometry">
+         <rect>
+          <x>240</x>
+          <y>10</y>
+          <width>41</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">#addNotesButton {
+border: none;
+border-radius: 25px;
+color: &quot;#30C193&quot;;
+font: 700 12pt &quot;Nirmala UI&quot;;
+}</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="base.qrc">
+          <normaloff>:/new/icon/Resources/assets/icon/plus.png</normaloff>:/new/icon/Resources/assets/icon/plus.png</iconset>
+        </property>
+       </widget>
+       <widget class="QListWidget" name="listWidget_2">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>60</y>
+          <width>281</width>
+          <height>551</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QListWidget {
+     color: #FFFFFF;
+border: 1px solid rgb(23, 33, 43);
+border-radius: 13px;
+color: rgb(141, 151, 173);
+font: 700 12pt &quot;Nirmala UI&quot;;
+ }
+ 
+ QListWidget::item {
+     height: 50px;
+border: 1px solid rgb(23, 33, 43);
+border-radius: 13px;
+color: rgb(141, 151, 173);
+font: 700 12pt &quot;Nirmala UI&quot;;
+ }
+ 
+QListWidget::item:selected {
+    background-color: rgb(31, 41, 54);
+border: 1px solid rgb(23, 33, 43);
+border-radius: 13px;
+color: rgb(141, 151, 173);
+font: 700 12pt &quot;Nirmala UI&quot;;
+}
+
+QScrollBar:vertical {
+	border: none;
+    background: rgb(45, 45, 68);
+    width: 14px;
+    margin: 15px 0 15px 0;
+	border-radius: 0px;
+ }
+
+QScrollBar::handle:vertical {	
+	background-color: rgb(80, 80, 122);
+	min-height: 30px;
+	border-radius: 7px;
+}
+QScrollBar::handle:vertical:hover{	
+	background-color: rgb(141, 151, 173);
+}
+QScrollBar::handle:vertical:pressed {	
+	background-color: rgb(104, 153, 252);
+}
+
+/* BTN TOP - SCROLLBAR */
+QScrollBar::sub-line:vertical {
+	border: none;
+	background-color: rgb(59, 59, 90);
+	height: 15px;
+	border-top-left-radius: 7px;
+	border-top-right-radius: 7px;
+	subcontrol-position: top;
+	subcontrol-origin: margin;
+}
+QScrollBar::sub-line:vertical:hover {	
+	background-color: rgb(141, 151, 173);
+}
+QScrollBar::sub-line:vertical:pressed {	
+	background-color: rgb(104, 153, 252);
+}
+
+/* BTN BOTTOM - SCROLLBAR */
+QScrollBar::add-line:vertical {
+	border: none;
+	background-color: rgb(59, 59, 90);
+	height: 15px;
+	border-bottom-left-radius: 7px;
+	border-bottom-right-radius: 7px;
+	subcontrol-position: bottom;
+	subcontrol-origin: margin;
+}
+QScrollBar::add-line:vertical:hover {	
+	background-color: rgb(141, 151, 173);
+}
+QScrollBar::add-line:vertical:pressed {	
+	background-color: rgb(104, 153, 252);
+}
+
+/* RESET ARROW */
+QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {
+	background: none;
+}
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+	background: none;
+}
+
+
+
+/* HORIZONTAL SCROLLBAR - HOMEWORK */
+QScrollBar:horizontal {
+   
+}
+QScrollBar::handle:horizontal {
+    
+}
+QScrollBar::add-line:horizontal {
+    
+}
+QScrollBar::sub-line:horizontal {
+    
+}
+QScrollBar::up-arrow:horizontal, QScrollBar::down-arrow:horizontal
+{
+
+}
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal
+{
+
+}</string>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::NoFrame</enum>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="lineEdit_2">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>10</y>
+          <width>221</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border: 1px solid rgb(104, 153, 252);
+border-radius: 4px;
+font: 12pt &quot;Nirmala UI&quot;;
+color: rgb(104, 153, 252);</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="maxLength">
+         <number>18</number>
+        </property>
+        <property name="placeholderText">
+         <string>All Items notes</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_3">
+        <property name="geometry">
+         <rect>
+          <x>200</x>
+          <y>16</y>
+          <width>21</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="base.qrc">:/new/userskey/Resources/assets/userkey/magnifying-glass.png</pixmap>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QFrame" name="frame_7">
+       <property name="geometry">
+        <rect>
+         <x>290</x>
+         <y>0</y>
+         <width>551</width>
+         <height>621</height>
+        </rect>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::Box</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <widget class="QStackedWidget" name="stackedWidget_4">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>9</y>
+          <width>531</width>
+          <height>601</height>
+         </rect>
+        </property>
+        <property name="currentIndex">
+         <number>1</number>
+        </property>
+        <widget class="QWidget" name="page_10"/>
+        <widget class="QWidget" name="page_7">
+         <widget class="QLabel" name="label_20">
+          <property name="geometry">
+           <rect>
+            <x>160</x>
+            <y>280</y>
+            <width>231</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">font: 700 14pt &quot;Nirmala UI&quot;;
+color: rgb(141, 151, 173);</string>
+          </property>
+          <property name="text">
+           <string>Select item to view</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_21">
+          <property name="geometry">
+           <rect>
+            <x>340</x>
+            <y>280</y>
+            <width>31</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="pixmap">
+           <pixmap resource="base.qrc">:/new/userskey/Resources/assets/userkey/view.png</pixmap>
+          </property>
+          <property name="scaledContents">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="page_8"/>
+       </widget>
+      </widget>
+     </widget>
+    </widget>
    </widget>
   </widget>
  </widget>

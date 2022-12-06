@@ -1,18 +1,19 @@
-#include "mainwindow.h"
-#include "errorwindow.h"
+#include "MainWindow.h"
+#include "ErrorWindow.h"
 #include <QApplication>
+
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     MainWindow w;
-    errorwindow error_window;
+    ErrorWindow errorWindow;
 
-    if(!w.db.open()) {
-        error_window.show();
+    if(w.db.open()) {
+        w.show();
     }
     else {
-        w.show();
+        errorWindow.show();
     }
 
     return a.exec();

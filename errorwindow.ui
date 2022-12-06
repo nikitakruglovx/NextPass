@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>errorwindow</class>
- <widget class="QWidget" name="errorwindow">
+ <class>ErrorWindow</class>
+ <widget class="QWidget" name="ErrorWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Error message</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: rgb(31, 41, 54);</string>

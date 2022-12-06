@@ -13,5 +13,18 @@
         <file>Resources/assets/icon/arrow-right.png</file>
         <file>Resources/assets/icon/copy.png</file>
         <file>Resources/assets/icon/error.png</file>
+        <file>Resources/assets/icon/plus.png</file>
+    </qresource>
+    <qresource prefix="/new/userskey">
+        <file>Resources/assets/userkey/key.png</file>
+        <file>Resources/assets/userkey/sticky-note.png</file>
+        <file>Resources/assets/userkey/magnifying-glass.png</file>
+        <file>Resources/assets/userkey/view.png</file>
+        <file>Resources/assets/userkey/key2.png</file>
+        <file>Resources/assets/userkey/key16x16.png</file>
+        <file>Resources/assets/userkey/trash.png</file>
+    </qresource>
+    <qresource prefix="/new/systemlogo">
+        <file>Resources/assets/systemlogo/logo.png</file>
     </qresource>
 </RCC>

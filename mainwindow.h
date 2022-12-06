@@ -10,7 +10,8 @@
 #include <QJsonDocument>
 #include <QMovie>
 
-#include "passcontroll.h"
+#include "PassControll.h"
+#include "DataBase.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -25,18 +26,12 @@ public:
     ~MainWindow();
 
 public:
-    passcontroll *home_window = new passcontroll;
-
+    PassControll *homeWindow = new PassControll;
     QSqlDatabase db;
-    QString DBMS = "QPSQL";
-    QString DB_NAME = "postgres";
-    QString DB_USERNAME = "postgres";
-    QString DB_PASSWORD = "admin";
-    QString DB_HOST = "127.0.0.1";
-    int DB_PORT = 5433;
 
 private:
     Ui::MainWindow *ui;
+    data::DataCon *datas;
 
     void mousePressEvent(QMouseEvent *event);
     void mouseMoveEvent(QMouseEvent *event);

@@ -16,15 +16,16 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Sql)
 
 set(PROJECT_SOURCES
         main.cpp
-        mainwindow.cpp
-        mainwindow.h
-        mainwindow.ui
-        passcontroll.cpp
-        passcontroll.h
-        passcontroll.ui
-        errorwindow.cpp
-        errorwindow.h
-        errorwindow.ui
+        MainWindow.cpp
+        MainWindow.h
+        MainWindow.ui
+        PassControll.cpp
+        PassControll.h
+        PassControll.ui
+        ErrorWindow.cpp
+        ErrorWindow.h
+        ErrorWindow.ui
+        DataBase.h
         base.qrc
 )
 

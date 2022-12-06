@@ -6,19 +6,19 @@
 #include <QMouseEvent>
 
 namespace Ui {
-class errorwindow;
+class ErrorWindow;
 }
 
-class errorwindow : public QWidget
+class ErrorWindow : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit errorwindow(QWidget *parent = nullptr);
-    ~errorwindow();
+    explicit ErrorWindow(QWidget *parent = nullptr);
+    ~ErrorWindow();
 
 private:
-    Ui::errorwindow *ui;
+    Ui::ErrorWindow *ui;
 
     void mousePressEvent(QMouseEvent *event);
     void mouseMoveEvent(QMouseEvent *event);

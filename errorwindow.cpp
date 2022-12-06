@@ -1,9 +1,9 @@
-#include "errorwindow.h"
+#include "ErrorWindow.h"
 #include "ui_errorwindow.h"
 
-errorwindow::errorwindow(QWidget *parent) :
+ErrorWindow::ErrorWindow(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::errorwindow)
+    ui(new Ui::ErrorWindow)
 {
     ui->setupUi(this);
     setObjectName("borderframeless");
@@ -11,17 +11,17 @@ errorwindow::errorwindow(QWidget *parent) :
     setWindowFlags(windowFlags() | Qt::WindowMinimizeButtonHint | Qt::WindowStaysOnTopHint);
 }
 
-errorwindow::~errorwindow()
+ErrorWindow::~ErrorWindow()
 {
     delete ui;
 }
 
-void errorwindow::mousePressEvent(QMouseEvent *event) {
+void ErrorWindow::mousePressEvent(QMouseEvent *event) {
     curs = event->globalPos();
 
 }
 
-void errorwindow::mouseMoveEvent(QMouseEvent *event) {
+void ErrorWindow::mouseMoveEvent(QMouseEvent *event) {
 
     new_curs = QPoint(event->globalPos() - curs);
     move(x() + new_curs.x(), y() + new_curs.y());
@@ -29,6 +29,6 @@ void errorwindow::mouseMoveEvent(QMouseEvent *event) {
 
 }
 
-void errorwindow::on_closeButton_clicked() {
+void ErrorWindow::on_closeButton_clicked() {
     this->close();
 }

@@ -10,9 +10,9 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     MainWindow w;
     ErrorWindow errorWindow;
-    data::DataConnection D;
+    data::DataConnection ConnectMethod;
 
-    if (D.ConnectingDataBase() == true) {
+    if (ConnectMethod.ConnectingDataBase() == true) {
         w.show();
     }
     else {

@@ -11,7 +11,7 @@
 #include <QCryptographicHash>
 
 
-PassControll::PassControll(QWidget *parent) : QWidget(parent), ui(new Ui::PassControll), datas(new data::DataConnection)
+PassControll::PassControll(QWidget *parent) : QWidget(parent), ui(new Ui::PassControll)
 
 {
 
@@ -353,8 +353,8 @@ void PassControll::Updater() {
     QJsonDocument doc = QJsonDocument::fromJson(val.toUtf8());
     QJsonObject json = doc.object();
     QString load_id = json["id"].toString();
-
     QList<QListWidgetItem*> item = ui->listWidget->selectedItems();
+
     foreach(QListWidgetItem * item, item)
     {
 

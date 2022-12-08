@@ -28,6 +28,8 @@ private:
 
 public slots:
     void on_closeButton_clicked();
+    void on_OKbutton_clicked();
+    void on_reConnectButton_clicked();
 };
 
 #endif // ERRORWINDOW_H

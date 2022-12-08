@@ -12,10 +12,10 @@ class DataConnection : QObject {
 private:
     QSqlDatabase db;
     QString DBMS = "QPSQL";
-    QString DB_NAME = "postgres";
-    QString DB_USERNAME = "postgres";
-    QString DB_PASSWORD = "admin";
-    QString DB_HOST = "127.0.0.1";
+    QString DB_NAME = "";
+    QString DB_USERNAME = "";
+    QString DB_PASSWORD = "";
+    QString DB_HOST = "";
     int DB_PORT = 5433;
 
 public:

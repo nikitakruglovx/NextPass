@@ -11,7 +11,6 @@
 #include <QMovie>
 
 #include "PassControll.h"
-#include "DataBase.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -31,7 +30,6 @@ public:
 
 private:
     Ui::MainWindow *ui;
-    data::DataCon *datas;
 
     void mousePressEvent(QMouseEvent *event);
     void mouseMoveEvent(QMouseEvent *event);
@@ -45,7 +43,7 @@ private:
     QMovie *pic = new QMovie(":/new/icon/Resources/assets/icon/connect.gif");
     QMovie *pic_2 = new QMovie(":/new/icon/Resources/assets/icon/reg.gif");
     QMovie *pic_success = new QMovie(":/new/icon/Resources/assets/icon/success.gif");
-    QString PROFILEPATH = "../VivaPassLock/profile.json";
+    QString PROFILEPATH = "C:/Users/user/Desktop/PROJECTS/VivaPassLock/profile.json";
     std::string PROFILEPATHsys = "C:/Users/user/Desktop/VivaPassLock/profile.json";
     QJsonObject conf_obj;
     QFile jsonfile;

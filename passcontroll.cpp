@@ -11,7 +11,7 @@
 #include <QCryptographicHash>
 
 
-PassControll::PassControll(QWidget *parent) : QWidget(parent), ui(new Ui::PassControll), datas(new data::DataCon)
+PassControll::PassControll(QWidget *parent) : QWidget(parent), ui(new Ui::PassControll), datas(new data::DataConnection)
 
 {
 
@@ -34,13 +34,6 @@ PassControll::PassControll(QWidget *parent) : QWidget(parent), ui(new Ui::PassCo
     QJsonDocument doc = QJsonDocument::fromJson(val.toUtf8());
     QJsonObject json = doc.object();
     QString load_id = json["id"].toString();
-
-    QSqlDatabase db = QSqlDatabase::addDatabase(datas->DBMS);
-    db.setDatabaseName(datas->DB_NAME);
-    db.setUserName(datas->DB_USERNAME);
-    db.setHostName(datas->DB_HOST);
-    db.setPort(datas->DB_PORT);
-    db.setPassword(datas->DB_PASSWORD);
 
     QSqlQuery query(db);
 

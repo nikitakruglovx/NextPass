@@ -29,7 +29,7 @@ public:
 
 private:
     Ui::PassControll *ui;
-    data::DataCon *datas;
+    data::DataConnection *datas;
 
 
     void mousePressEvent(QMouseEvent *event);
@@ -43,7 +43,7 @@ private:
 
 
 
-    QString PROFILEPATH = "../VivaPassLock/profile.json";
+    QString PROFILEPATH = "C:/Users/user/Desktop/PROJECTS/VivaPassLock/profile.json";
 
 public slots:
     void on_closeButton_clicked();

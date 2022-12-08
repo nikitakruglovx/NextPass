@@ -19,19 +19,11 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
-    , datas(new data::DataCon)
 {
     ui->setupUi(this);
     setObjectName("borderframeless");
     setWindowFlags(Qt::FramelessWindowHint| Qt::WindowSystemMenuHint);
     setWindowFlags(windowFlags() | Qt::WindowMinimizeButtonHint);
-
-    db = QSqlDatabase::addDatabase(datas->DBMS);
-    db.setDatabaseName(datas->DB_NAME);
-    db.setUserName(datas->DB_USERNAME);
-    db.setHostName(datas->DB_HOST);
-    db.setPort(datas->DB_PORT);
-    db.setPassword(datas->DB_PASSWORD);
 
 }
 

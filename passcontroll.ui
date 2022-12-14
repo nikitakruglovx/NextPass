@@ -1209,26 +1209,31 @@ color: rgb(31, 41, 54);
          <widget class="QPushButton" name="clearButton">
           <property name="geometry">
            <rect>
-            <x>250</x>
+            <x>20</x>
             <y>540</y>
-            <width>111</width>
+            <width>51</width>
             <height>41</height>
            </rect>
           </property>
           <property name="styleSheet">
            <string notr="true">#clearButton {
-border: 1.5px solid rgb(224, 79, 95);
-border-radius: 8px;
+border: none;
 color: rgb(224, 79, 95);
 font: 700 12pt &quot;Nirmala UI&quot;;
-}
-#clearButton:hover {
-background-color: rgb(224, 79, 95);
-color: rgb(31, 41, 54);
 }</string>
           </property>
           <property name="text">
-           <string>Delete</string>
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="base.qrc">
+            <normaloff>:/new/userskey/Resources/assets/userkey/back-arrow.png</normaloff>:/new/userskey/Resources/assets/userkey/back-arrow.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>24</width>
+            <height>24</height>
+           </size>
           </property>
          </widget>
          <widget class="QLabel" name="label_17">
@@ -1333,6 +1338,9 @@ font: 700 12pt &quot;Nirmala UI&quot;;
           <width>281</width>
           <height>551</height>
          </rect>
+        </property>
+        <property name="focusPolicy">
+         <enum>Qt::NoFocus</enum>
         </property>
         <property name="styleSheet">
          <string notr="true">QListWidget {
@@ -1518,7 +1526,80 @@ color: rgb(104, 153, 252);</string>
         <property name="currentIndex">
          <number>1</number>
         </property>
-        <widget class="QWidget" name="page_10"/>
+        <widget class="QWidget" name="page_10">
+         <widget class="QPushButton" name="updateNotesButton">
+          <property name="geometry">
+           <rect>
+            <x>380</x>
+            <y>540</y>
+            <width>131</width>
+            <height>41</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">#updateNotesButton {
+border: 1.5px solid &quot;#30C193&quot;;
+border-radius: 8px;
+color: &quot;#30C193&quot;;
+font: 700 12pt &quot;Nirmala UI&quot;;
+}
+#updateNotesButton:hover {
+background-color: &quot;#30C193&quot;;
+color: rgb(31, 41, 54);
+}</string>
+          </property>
+          <property name="text">
+           <string>Update</string>
+          </property>
+         </widget>
+         <widget class="QTextEdit" name="textEdit_2">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>30</y>
+            <width>491</width>
+            <height>481</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">border: 1.5px solid &quot;#30C193&quot;;
+border-radius: 8px;
+font: 18pt &quot;Nirmala UI&quot;;
+color: rgb(255, 255, 255);</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="deleteButton_3">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>540</y>
+            <width>51</width>
+            <height>41</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">#deleteButton_3 {
+border: none;
+color: rgb(224, 79, 95);
+font: 700 12pt &quot;Nirmala UI&quot;;
+}
+</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="base.qrc">
+            <normaloff>:/new/userskey/Resources/assets/userkey/trash.png</normaloff>:/new/userskey/Resources/assets/userkey/trash.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>24</width>
+            <height>24</height>
+           </size>
+          </property>
+         </widget>
+        </widget>
         <widget class="QWidget" name="page_7">
          <widget class="QLabel" name="label_20">
           <property name="geometry">
@@ -1557,7 +1638,80 @@ color: rgb(141, 151, 173);</string>
           </property>
          </widget>
         </widget>
-        <widget class="QWidget" name="page_8"/>
+        <widget class="QWidget" name="page_8">
+         <widget class="QTextEdit" name="textEdit">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>30</y>
+            <width>491</width>
+            <height>481</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">border: 1.5px solid &quot;#30C193&quot;;
+border-radius: 8px;
+font: 18pt &quot;Nirmala UI&quot;;
+color: rgb(255, 255, 255);</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="addsaveButton_2">
+          <property name="geometry">
+           <rect>
+            <x>380</x>
+            <y>540</y>
+            <width>131</width>
+            <height>41</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">#addsaveButton_2 {
+border: 1.5px solid &quot;#30C193&quot;;
+border-radius: 8px;
+color: &quot;#30C193&quot;;
+font: 700 12pt &quot;Nirmala UI&quot;;
+}
+#addsaveButton_2:hover {
+background-color: &quot;#30C193&quot;;
+color: rgb(31, 41, 54);
+}</string>
+          </property>
+          <property name="text">
+           <string>Add and Save</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="clearButton_2">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>540</y>
+            <width>51</width>
+            <height>41</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">#clearButton_2 {
+border: none;
+color: rgb(224, 79, 95);
+font: 700 12pt &quot;Nirmala UI&quot;;
+}
+</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="base.qrc">
+            <normaloff>:/new/userskey/Resources/assets/userkey/back-arrow.png</normaloff>:/new/userskey/Resources/assets/userkey/back-arrow.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>24</width>
+            <height>24</height>
+           </size>
+          </property>
+         </widget>
+        </widget>
        </widget>
       </widget>
      </widget>

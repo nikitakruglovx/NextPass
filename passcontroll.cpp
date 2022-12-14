@@ -11,8 +11,7 @@
 #include <QCryptographicHash>
 
 
-PassControll::PassControll(QWidget *parent) : QWidget(parent), ui(new Ui::PassControll)
-
+PassControll::PassControll(QWidget *parent) : QWidget(parent), ui(new Ui::PassControll), datas(new data::DataConnection)
 {
 
     ui->setupUi(this);
@@ -35,6 +34,12 @@ PassControll::PassControll(QWidget *parent) : QWidget(parent), ui(new Ui::PassCo
     QJsonObject json = doc.object();
     QString load_id = json["id"].toString();
 
+    db = QSqlDatabase::addDatabase(datas->DBMS);
+    db.setDatabaseName(datas->DB_NAME);
+    db.setUserName(datas->DB_USERNAME);
+    db.setHostName(datas->DB_HOST);
+    db.setPort(datas->DB_PORT);
+    db.setPassword(datas->DB_PASSWORD);
     QSqlQuery query(db);
 
     if (db.open()) {
@@ -46,6 +51,22 @@ PassControll::PassControll(QWidget *parent) : QWidget(parent), ui(new Ui::PassCo
             item->setIcon(QIcon(":/new/userskey/Resources/assets/userkey/key16x16.png"));
             item->setText(marker);
             ui->listWidget->addItem(item);
+        }
+        query.exec("SELECT notes FROM data_users_notes WHERE fk_user_id =\'"+ load_id +"\'");
+        while (query.next()) {
+            QString marker = query.value(0).toString();
+
+            QListWidgetItem *itemNotes = new QListWidgetItem;
+            itemNotes->setIcon(QIcon(":/new/userskey/Resources/assets/userkey/sticky-note.png"));
+            if (marker.length() > 20) {
+                itemNotes->setText(marker.mid(0,20).append("..."));
+                ui->listWidget_2->addItem(itemNotes);
+            }
+            else {
+                itemNotes->setText(marker);
+                ui->listWidget_2->addItem(itemNotes);
+            }
+
         }
     }
     else {
@@ -162,7 +183,6 @@ void PassControll::on_passwordsButton_clicked() {
 }
 
 void PassControll::on_notesButton_clicked() {
-
     ui->stackedWidget_2->setCurrentIndex(1);
     ui->notesButton->setStyleSheet("background-color: rgb(23, 33, 43); border: 1px solid rgb(23, 33, 43); border-radius: 13px;color: rgb(141, 151, 173);font: 700 12pt 'Nirmala UI';");
     ui->passwordsButton->setStyleSheet("#passwordsButton {background-color: rgb(31, 41, 54); border: none; color: rgb(141, 151, 173); font: 700 12pt 'Nirmala UI';} #passwordsButton:hover { background-color: rgb(23, 33, 43); border: 1px solid rgb(23, 33, 43);border-radius: 13px; }");
@@ -326,6 +346,42 @@ void PassControll::on_listWidget_itemClicked(QListWidgetItem *item) {
     }
 }
 
+void PassControll::on_listWidget_2_itemClicked(QListWidgetItem *itemNotes) {
+    QFileInfo load_profile(PROFILEPATH);
+    QFile f(PROFILEPATH);
+    QString val;
+
+    f.open(QIODevice::ReadOnly | QIODevice::Text);
+    val = f.readAll();
+    f.close();
+
+    QJsonDocument doc = QJsonDocument::fromJson(val.toUtf8());
+    QJsonObject json = doc.object();
+    QString load_id = json["id"].toString();
+    QSqlQuery query;
+    if (itemNotes->text().length() > 20) {
+        QString streck = itemNotes->text().mid(0,20);
+
+        query.exec("SELECT notes FROM data_users_notes WHERE notes LIKE \'%" + streck + "%\' AND fk_user_id =\'" + load_id + "\' ");
+
+        while (query.next()) {
+            QString notes = query.value(0).toString();
+            ui->stackedWidget_4->setCurrentIndex(0);
+            ui->textEdit_2->setText(notes);
+        }
+    }
+    else {
+        query.exec("SELECT notes FROM data_users_notes WHERE notes =\'" + itemNotes->text() + "\' AND fk_user_id =\'" + load_id + "\' ");
+
+        while (query.next()) {
+            QString notes = query.value(0).toString();
+            ui->stackedWidget_4->setCurrentIndex(0);
+            ui->textEdit_2->setText(notes);
+        }
+    }
+
+}
+
 void PassControll::on_deleteButton_clicked() {
 
     QSqlQuery query(db);
@@ -420,7 +476,6 @@ void PassControll::on_lineEdit_returnPressed() {
     }
     else {
         while (query.next()) {
-
             ui->listWidget->clear();
             QString searchingItem = query.value(0).toString();
             QListWidgetItem *item = new QListWidgetItem;
@@ -430,4 +485,68 @@ void PassControll::on_lineEdit_returnPressed() {
             ui->listWidget->addItem(item);
         }
     }
+}
+
+void PassControll::AddNotes() {
+    if (ui->textEdit->toPlainText() == "") {
+        ui->textEdit->setStyleSheet("border: 1.5px solid '#e04f5f'; border-radius: 8px;font: 18pt 'Nirmala UI'; color: rgb(255, 255, 255);");
+        QTimer::singleShot(2000, [this] { ui->textEdit->setStyleSheet("border: 1.5px solid '#30C193'; border-radius: 8px;font: 18pt 'Nirmala UI'; color: rgb(255, 255, 255);"); });
+    }
+    else {
+        QFileInfo load_profile(PROFILEPATH);
+        QFile f(PROFILEPATH);
+        QString val;
+        QSqlQuery query(db);
+        QString notes = ui->textEdit->toPlainText();
+        int notesLen = ui->textEdit->toPlainText().length();
+
+        f.open(QIODevice::ReadOnly | QIODevice::Text);
+        val = f.readAll();
+        f.close();
+
+        QJsonDocument doc = QJsonDocument::fromJson(val.toUtf8());
+        QJsonObject json = doc.object();
+        QString load_id = json["id"].toString();
+
+        query.exec("SELECT notes FROM data_users_notes WHERE notes =\'" + notes + "\' AND fk_user_id =\'" + load_id + "\' ");
+
+        if (query.next() == false) {
+            query.prepare("INSERT INTO data_users_notes(notes, fk_user_id)VALUES(:notes, :fk_user_id);");
+            query.bindValue(":notes", notes);
+            query.bindValue(":fk_user_id", load_id);
+            query.exec();
+
+            ui->textEdit->clear();
+            if (notesLen > 15) {
+                ui->listWidget_2->addItem(new QListWidgetItem(QIcon(":/new/userskey/Resources/assets/userkey/sticky-note.png")
+                                                              , notes.mid(0,20).append("...")));
+                ui->stackedWidget_4->setCurrentIndex(1);
+            }
+            else {
+                ui->listWidget_2->addItem(new QListWidgetItem(QIcon(":/new/userskey/Resources/assets/userkey/sticky-note.png"), notes));
+                ui->stackedWidget_4->setCurrentIndex(1);
+            }
+        }
+        else {
+            ui->textEdit->setStyleSheet("border: 1.5px solid '#e04f5f'; border-radius: 8px;font: 18pt 'Nirmala UI'; color: rgb(255, 255, 255);");
+            QTimer::singleShot(2000, [this] { ui->textEdit->setStyleSheet("border: 1.5px solid '#30C193'; border-radius: 8px;font: 18pt 'Nirmala UI'; color: rgb(255, 255, 255);"); });
+        }
+    }
+}
+
+void PassControll::on_addNotesButton_clicked() {
+    ui->stackedWidget_4->setCurrentIndex(2);
+}
+
+void PassControll::on_clearButton_2_clicked() {
+    ui->stackedWidget_4->setCurrentIndex(1);
+    ui->textEdit->clear();
+}
+
+void PassControll::on_addsaveButton_2_clicked() {
+    AddNotes();
+}
+
+void PassControll::on_textEdit_returnPressed() {
+    AddNotes();
 }

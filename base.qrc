@@ -23,6 +23,9 @@
         <file>Resources/assets/userkey/key2.png</file>
         <file>Resources/assets/userkey/key16x16.png</file>
         <file>Resources/assets/userkey/trash.png</file>
+        <file>Resources/assets/userkey/notes.png</file>
+        <file>Resources/assets/userkey/back-arrow.png</file>
+        <file>Resources/assets/userkey/notesback.jpg</file>
     </qresource>
     <qresource prefix="/new/systemlogo">
         <file>Resources/assets/systemlogo/logo.png</file>

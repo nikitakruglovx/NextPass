@@ -9,7 +9,7 @@ namespace data {
 class DataConnection : QObject {
     Q_OBJECT
 
-private:
+public:
     QSqlDatabase db;
     QString DBMS = "QPSQL";
     QString DB_NAME = "postgres";

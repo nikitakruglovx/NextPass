@@ -11,4 +11,7 @@ Uses:
 
 ![Image alt](https://i.imgur.com/Zm4RclA.jpg)
 ![Image alt](https://i.imgur.com/SZGe5fJ.jpg)
+<<<<<<< HEAD
 
+=======
+>>>>>>> bd5503f06d09779169722ac5e7dfc8216cf63f18

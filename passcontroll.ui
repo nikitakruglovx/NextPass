@@ -609,7 +609,7 @@ color: rgb(104, 153, 252);</string>
          </rect>
         </property>
         <property name="currentIndex">
-         <number>0</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="page_5">
          <widget class="QLabel" name="label_6">
@@ -1563,7 +1563,7 @@ color: rgb(104, 153, 252);</string>
          </rect>
         </property>
         <property name="currentIndex">
-         <number>1</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="page_10">
          <widget class="QPushButton" name="updateNotesButton">
@@ -1612,13 +1612,14 @@ color: rgb(255, 255, 255);</string>
            <rect>
             <x>20</x>
             <y>540</y>
-            <width>51</width>
+            <width>71</width>
             <height>41</height>
            </rect>
           </property>
           <property name="styleSheet">
            <string notr="true">#deleteButton_3 {
-border: none;
+border: 1.5px solid rgb(224, 79, 95);
+border-radius: 8px;
 color: rgb(224, 79, 95);
 font: 700 12pt &quot;Nirmala UI&quot;;
 }
@@ -1633,8 +1634,8 @@ font: 700 12pt &quot;Nirmala UI&quot;;
           </property>
           <property name="iconSize">
            <size>
-            <width>24</width>
-            <height>24</height>
+            <width>20</width>
+            <height>20</height>
            </size>
           </property>
          </widget>

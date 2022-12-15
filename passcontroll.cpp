@@ -458,8 +458,9 @@ void PassControll::on_lineEdit_returnPressed() {
     QJsonObject json = doc.object();
     QString load_id = json["id"].toString();
     QString SearchQuery = ui->lineEdit->text();
+    SearchQuery = SearchQuery.trimmed();
 
-    query.exec("SELECT data_title FROM data_users WHERE data_title = \'" + SearchQuery + "\' AND fk_user_id =\'" + load_id + "\' ");
+    query.exec("SELECT data_title FROM data_users WHERE data_title LIKE \'%" + SearchQuery + "%\' AND fk_user_id =\'" + load_id + "\' ");
     if (SearchQuery == "") {
 
         ui->listWidget->clear();
@@ -623,6 +624,56 @@ void PassControll::on_deleteButton_3_clicked() {
             query.exec("DELETE FROM data_users_notes WHERE notes LIKE \'%" + notesItem->text().mid(0,20) + "%\' ");
             delete ui->listWidget_2->takeItem(ui->listWidget_2->row(notesItem));
             ui->stackedWidget_4->setCurrentIndex(1);
+        }
+    }
+}
+
+void PassControll::on_lineEdit_2_returnPressed() {
+    QSqlQuery query(db);
+    QFileInfo load_profile(PROFILEPATH);
+    QFile f(PROFILEPATH);
+    QString val;
+
+    f.open(QIODevice::ReadOnly | QIODevice::Text);
+    val = f.readAll();
+    f.close();
+
+    QJsonDocument doc = QJsonDocument::fromJson(val.toUtf8());
+    QJsonObject json = doc.object();
+    QString load_id = json["id"].toString();
+    QString SearchQuery = ui->lineEdit_2->text();
+    SearchQuery = SearchQuery.trimmed();
+
+    query.exec("SELECT notes FROM data_users_notes WHERE notes LIKE \'%" + SearchQuery + "%\' AND fk_user_id =\'" + load_id + "\' ");
+    if (SearchQuery == "") {
+
+        ui->listWidget_2->clear();
+
+        query.exec("SELECT notes FROM data_users_notes WHERE fk_user_id =\'"+ load_id +"\'");
+        while (query.next()) {
+            QString marker = query.value(0).toString();
+            QListWidgetItem *notesItem = new QListWidgetItem;
+
+            notesItem->setIcon(QIcon(":/new/userskey/Resources/assets/userkey/sticky-note.png"));
+            notesItem->setText(marker);
+
+            ui->listWidget_2->addItem(notesItem);
+        }
+    }
+    else {
+        while (query.next()) {
+            ui->listWidget_2->clear();
+            QString searchingItem = query.value(0).toString();
+            QListWidgetItem *notesItem = new QListWidgetItem;
+
+            notesItem->setIcon(QIcon(":/new/userskey/Resources/assets/userkey/sticky-note.png"));
+            notesItem->setText(searchingItem);
+            if (searchingItem.length() < 20) {
+                ui->listWidget_2->addItem(notesItem);
+            }
+            else {
+                ui->listWidget_2->addItem(notesItem->text().mid(0,20).append("..."));
+            }
         }
     }
 }

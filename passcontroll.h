@@ -39,7 +39,6 @@ private:
 
     QPoint curs;
     QPoint new_curs;
-//    QString PROFILEPATH = "C:\\Users\\user\\Desktop\\PROJECTS\\VivaPassLock\\profile\\profile.json";
     QString PROFILEPATH = "C:\\VivaPassLock\\profile\\profile.json";
 
 public slots:
@@ -72,6 +71,7 @@ private slots:
     void on_UsernameEdit_2_returnPressed();
     void on_PasswordEdit_2_returnPressed();
     void on_lineEdit_returnPressed();
+    void on_lineEdit_2_returnPressed();
 };
 
 #endif

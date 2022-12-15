@@ -318,6 +318,45 @@ border-radius: 13px;
        </size>
       </property>
      </widget>
+     <widget class="QPushButton" name="settingsButton">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>540</y>
+        <width>221</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">#settingsButton {
+background-color: rgb(31, 41, 54);
+border: 1px solid rgb(104, 153, 252);
+border-radius: 13px;
+color: rgb(141, 151, 173);
+font: 700 12pt &quot;Nirmala UI&quot;;
+}
+#settingsButton:hover {
+	icon: url(:/new/userskey/Resources/assets/userkey/index2.png);
+background-color: rgb(104, 153, 252);
+color: rgb(31, 41, 54);
+border: 1px solid rgb(104, 153, 252);
+border-radius: 13px;
+}</string>
+      </property>
+      <property name="text">
+       <string> Settings</string>
+      </property>
+      <property name="icon">
+       <iconset resource="base.qrc">
+        <normaloff>:/new/userskey/Resources/assets/userkey/index.png</normaloff>:/new/userskey/Resources/assets/userkey/index.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>20</width>
+        <height>20</height>
+       </size>
+      </property>
+     </widget>
     </widget>
     <widget class="QStackedWidget" name="stackedWidget_2">
      <property name="geometry">

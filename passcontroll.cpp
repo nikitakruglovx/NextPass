@@ -9,6 +9,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QCryptographicHash>
+#include <QMessageBox>
 
 
 PassControll::PassControll(QWidget *parent) : QWidget(parent), ui(new Ui::PassControll), datas(new data::DataConnection)
@@ -497,7 +498,7 @@ void PassControll::AddNotes() {
         QFile f(PROFILEPATH);
         QString val;
         QSqlQuery query(db);
-        QString notes = ui->textEdit->toPlainText();
+        QString notes = ui->textEdit->toPlainText(); notes = notes.trimmed();
         int notesLen = ui->textEdit->toPlainText().length();
 
         f.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -547,6 +548,81 @@ void PassControll::on_addsaveButton_2_clicked() {
     AddNotes();
 }
 
-void PassControll::on_textEdit_returnPressed() {
-    AddNotes();
+void PassControll::UpdateNotes() {
+
+    QSqlQuery query(db);
+    QFileInfo load_profile(PROFILEPATH);
+    QFile f(PROFILEPATH);
+    QString val;
+
+    f.open(QIODevice::ReadOnly | QIODevice::Text);
+    val = f.readAll();
+    f.close();
+    QJsonDocument doc = QJsonDocument::fromJson(val.toUtf8());
+    QJsonObject json = doc.object();
+    QString load_id = json["id"].toString();
+    QList<QListWidgetItem*> notesItem = ui->listWidget_2->selectedItems();
+    QString NotesValue = ui->textEdit_2->toPlainText();
+    NotesValue = NotesValue.trimmed();
+
+    foreach(QListWidgetItem * notesItem, notesItem)
+    {
+        if (notesItem->text().length() < 20) {
+            query.exec("SELECT notes FROM data_users_notes WHERE notes =\'" + NotesValue + "\' AND fk_user_id =\'" + load_id + "\' ");
+            if (query.next() == false) {
+                query.exec("UPDATE data_users_notes SET notes = \'" + NotesValue + "\' WHERE fk_user_id = \'" + load_id + "\' AND notes = \'" + notesItem->text() + "\' ");
+                if (ui->textEdit_2->toPlainText().length() < 20) {
+                    notesItem->setText(NotesValue);
+                }
+                else {
+                    notesItem->setText(NotesValue.mid(0,20).append("..."));
+                }
+            }
+            else {
+                ui->textEdit_2->setStyleSheet("border: 1.5px solid '#e04f5f'; border-radius: 8px;font: 18pt 'Nirmala UI'; color: rgb(255, 255, 255);");
+                QTimer::singleShot(2000, [this] { ui->textEdit_2->setStyleSheet("border: 1.5px solid '#30C193'; border-radius: 8px;font: 18pt 'Nirmala UI'; color: rgb(255, 255, 255);"); });
+            }
+        }
+        else {
+            query.exec("SELECT notes FROM data_users_notes WHERE notes =\'" + NotesValue + "\' AND fk_user_id =\'" + load_id + "\' ");
+            if (query.next() == false) {
+                query.exec("UPDATE data_users_notes SET notes = \'" + NotesValue + "\' WHERE fk_user_id = \'" + load_id + "\' AND notes LIKE \'%" + notesItem->text().mid(0,20) + "%\' ");
+                if (ui->textEdit_2->toPlainText().length() < 20) {
+                    notesItem->setText(NotesValue);
+                }
+                else {
+                    notesItem->setText(NotesValue.mid(0,20).append("..."));
+                }
+            }
+            else {
+                ui->textEdit_2->setStyleSheet("border: 1.5px solid '#e04f5f'; border-radius: 8px;font: 18pt 'Nirmala UI'; color: rgb(255, 255, 255);");
+                QTimer::singleShot(2000, [this] { ui->textEdit_2->setStyleSheet("border: 1.5px solid '#30C193'; border-radius: 8px;font: 18pt 'Nirmala UI'; color: rgb(255, 255, 255);"); });
+            }
+        }
+    }
+
+}
+
+void PassControll::on_updateNotesButton_clicked() {
+    UpdateNotes();
+}
+
+void PassControll::on_deleteButton_3_clicked() {
+    QSqlQuery query(db);
+    QString notes = ui->textEdit_2->toPlainText();
+    QList<QListWidgetItem*> notesItem = ui->listWidget_2->selectedItems();
+
+    foreach(QListWidgetItem * notesItem, notesItem)
+    {
+        if (notesItem->text().length() < 20) {
+            query.exec("DELETE FROM data_users_notes WHERE notes =\'" + notesItem->text() + "\' ");
+            delete ui->listWidget_2->takeItem(ui->listWidget_2->row(notesItem));
+            ui->stackedWidget_4->setCurrentIndex(1);
+        }
+        else {
+            query.exec("DELETE FROM data_users_notes WHERE notes LIKE \'%" + notesItem->text().mid(0,20) + "%\' ");
+            delete ui->listWidget_2->takeItem(ui->listWidget_2->row(notesItem));
+            ui->stackedWidget_4->setCurrentIndex(1);
+        }
+    }
 }

@@ -34,6 +34,7 @@ private:
     void validationPass();
     void AddItem();
     void Updater();
+    void UpdateNotes();
     void AddNotes();
 
     QPoint curs;
@@ -54,9 +55,11 @@ public slots:
     void on_clearButton_2_clicked();
     void on_addsaveButton_clicked();
     void on_deleteButton_clicked();
+    void on_deleteButton_3_clicked();
     void on_updateButton_clicked();
     void on_addNotesButton_clicked();
     void on_addsaveButton_2_clicked();
+    void on_updateNotesButton_clicked();
 
 private slots:
     void on_passEdit_returnPressed();
@@ -69,7 +72,6 @@ private slots:
     void on_UsernameEdit_2_returnPressed();
     void on_PasswordEdit_2_returnPressed();
     void on_lineEdit_returnPressed();
-    void on_textEdit_returnPressed();
 };
 
 #endif

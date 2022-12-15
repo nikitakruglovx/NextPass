@@ -9,4 +9,6 @@ Uses:
 - Storage in the database (PostgreSQL)
 
 
-![Image alt](https://i.imgur.com/zpulAHF.jpg)
+![Image alt](https://i.imgur.com/Zm4RclA.jpg)
+![Image alt](https://i.imgur.com/SZGe5fJ.jpg)
+

@@ -1,3 +1,2 @@
-CMakeLists.txt.pMZvqZ
-CMakeLists.txt.user
-profile.json
+CMakeLists.txt*
+/profile/profile.json

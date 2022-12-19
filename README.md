@@ -10,6 +10,6 @@ Uses:
 
 
 ![Image alt](https://i.imgur.com/Zm4RclA.jpg)
-![Image alt](https://i.imgur.com/SZGe5fJ.jpg)
+![Image alt](https://github.com/nikitakruglovx/NextPass/blob/main/Screenshot%202022-12-18%20234036.png)
 
 

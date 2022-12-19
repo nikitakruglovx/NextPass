@@ -42,7 +42,7 @@ private:
     QPoint new_curs;
     QMovie *pic = new QMovie(":/new/icon/Resources/assets/icon/connect.gif");
     QMovie *pic_2 = new QMovie(":/new/icon/Resources/assets/icon/reg.gif");
-    QString PROFILEPATH = "C:\\VivaPassLock\\profile\\profile.json";
+    QString PROFILEPATH = "C:\\NextPass\\profile\\profile.json";
     QMovie *pic_success = new QMovie(":/new/icon/Resources/assets/icon/success.gif");
     QJsonObject conf_obj;
     QFile jsonfile;

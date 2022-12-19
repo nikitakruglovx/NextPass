@@ -1,6 +1,7 @@
 #include "PassControll.h"
 #include "ui_passcontroll.h"
 #include "ErrorWindow.h"
+#include "MainWindow.h"
 
 #include <QTimer>
 #include <QSqlQuery>
@@ -177,14 +178,21 @@ void PassControll::on_passEdit_returnPressed() {
 }
 
 void PassControll::on_passwordsButton_clicked() {
-
+    ui->oldpass->clear();
+    ui->newpass->clear();
+    ui->renewpass->clear();
+    ui->label_22->clear();
     ui->stackedWidget_2->setCurrentIndex(0);
     ui->passwordsButton->setStyleSheet("background-color: rgb(23, 33, 43); border: 1px solid rgb(23, 33, 43); border-radius: 13px;color: rgb(141, 151, 173);font: 700 12pt 'Nirmala UI';");
     ui->notesButton->setStyleSheet("#notesButton {background-color: rgb(31, 41, 54); border: none; color: rgb(141, 151, 173); font: 700 12pt 'Nirmala UI';} #notesButton:hover { background-color: rgb(23, 33, 43); border: 1px solid rgb(23, 33, 43);border-radius: 13px; }");
 }
 
 void PassControll::on_notesButton_clicked() {
-    ui->stackedWidget_2->setCurrentIndex(1);
+    ui->oldpass->clear();
+    ui->newpass->clear();
+    ui->renewpass->clear();
+    ui->label_22->clear();
+    ui->stackedWidget_2->setCurrentIndex(2);
     ui->notesButton->setStyleSheet("background-color: rgb(23, 33, 43); border: 1px solid rgb(23, 33, 43); border-radius: 13px;color: rgb(141, 151, 173);font: 700 12pt 'Nirmala UI';");
     ui->passwordsButton->setStyleSheet("#passwordsButton {background-color: rgb(31, 41, 54); border: none; color: rgb(141, 151, 173); font: 700 12pt 'Nirmala UI';} #passwordsButton:hover { background-color: rgb(23, 33, 43); border: 1px solid rgb(23, 33, 43);border-radius: 13px; }");
 }
@@ -673,6 +681,156 @@ void PassControll::on_lineEdit_2_returnPressed() {
             }
             else {
                 ui->listWidget_2->addItem(notesItem->text().mid(0,20).append("..."));
+            }
+        }
+    }
+}
+
+void PassControll::on_settingsButton_clicked() {
+    ui->stackedWidget_2->setCurrentIndex(1);
+    ui->passwordsButton->setStyleSheet("#passwordsButton {background-color: rgb(31, 41, 54); border: none; color: rgb(141, 151, 173); font: 700 12pt 'Nirmala UI';} #passwordsButton:hover { background-color: rgb(23, 33, 43); border: 1px solid rgb(23, 33, 43);border-radius: 13px; }");
+    ui->notesButton->setStyleSheet("#notesButton {background-color: rgb(31, 41, 54); border: none; color: rgb(141, 151, 173); font: 700 12pt 'Nirmala UI';} #notesButton:hover { background-color: rgb(23, 33, 43); border: 1px solid rgb(23, 33, 43);border-radius: 13px; }");
+}
+
+void PassControll::on_changeButton_clicked() {
+    QSqlQuery query(db);
+    QFileInfo load_profile(PROFILEPATH);
+    QFile f(PROFILEPATH);
+    QString val;
+
+    f.open(QIODevice::ReadOnly | QIODevice::Text);
+    val = f.readAll();
+    f.close();
+
+    QJsonDocument doc = QJsonDocument::fromJson(val.toUtf8());
+    QJsonObject json = doc.object();
+    QString load_id = json["id"].toString();
+
+    if (ui->oldpass->text() == "") {
+        ui->oldpass->setStyleSheet("background-color: rgb(31, 41, 54);border: 1px solid rgb(224, 79, 95); border-radius: 10px;color: rgb(224, 79, 95);font: 700 12pt 'Nirmala UI';");
+        QTimer::singleShot(2000, [this] {
+            ui->oldpass->setStyleSheet("background-color: rgb(31, 41, 54);border: 1px solid rgb(104, 153, 252);border-radius: 10px;color: rgb(104, 153, 252);font: 700 12pt 'Nirmala UI';");
+        });
+    }
+    else if (ui->newpass->text() == "") {
+        ui->newpass->setStyleSheet("background-color: rgb(31, 41, 54);border: 1px solid rgb(224, 79, 95); border-radius: 10px;color: rgb(224, 79, 95);font: 700 12pt 'Nirmala UI';");
+        QTimer::singleShot(2000, [this] {
+            ui->newpass->setStyleSheet("background-color: rgb(31, 41, 54);border: 1px solid rgb(104, 153, 252);border-radius: 10px;color: rgb(104, 153, 252);font: 700 12pt 'Nirmala UI';");
+        });
+    }
+    else if (ui->renewpass->text() == "") {
+        ui->renewpass->setStyleSheet("background-color: rgb(31, 41, 54);border: 1px solid rgb(224, 79, 95); border-radius: 10px;color: rgb(224, 79, 95);font: 700 12pt 'Nirmala UI';");
+        QTimer::singleShot(2000, [this] {
+            ui->renewpass->setStyleSheet("background-color: rgb(31, 41, 54);border: 1px solid rgb(104, 153, 252);border-radius: 10px;color: rgb(104, 153, 252);font: 700 12pt 'Nirmala UI';");
+        });
+    }
+    else {
+        if (ui->newpass->text() == ui->renewpass->text()) {
+            QString passValue = ui->newpass->text();
+            QByteArray passByte = passValue.toUtf8();
+            QString hashedPass = QCryptographicHash::hash(passByte, QCryptographicHash::Sha256).toHex();
+
+            QString OldpassValue = ui->oldpass->text();
+            QByteArray OldpassByte = OldpassValue.toUtf8();
+            QString OldhashedPass = QCryptographicHash::hash(OldpassByte, QCryptographicHash::Sha256).toHex();
+
+            query.exec("SELECT user_password FROM users WHERE user_id =\'" + load_id + "\'");
+            while (query.next()) {
+                QString pass = query.value(0).toString();
+                if (pass == OldhashedPass) {
+                    if(query.exec("UPDATE users SET user_password =\'" + hashedPass + "\' WHERE user_id =\'" + load_id + "\'")) {
+                        ui->label_22->setStyleSheet("font: 700 10pt 'Nirmala UI'; color: '#30C193';");
+                        ui->label_22->setText("Success update!");
+                    }
+                    else {
+                        ui->label_22->setStyleSheet("font: 700 10pt 'Nirmala UI'; color: rgb(224, 79, 95);");
+                        ui->label_22->setText("Some error :(");
+                    }
+                }
+                else {
+                    ui->oldpass->setStyleSheet("background-color: rgb(31, 41, 54);border: 1px solid rgb(224, 79, 95); border-radius: 10px;color: rgb(224, 79, 95);font: 700 12pt 'Nirmala UI';");
+                    QTimer::singleShot(2000, [this] {
+                        ui->oldpass->setStyleSheet("background-color: rgb(31, 41, 54);border: 1px solid rgb(104, 153, 252);border-radius: 10px;color: rgb(104, 153, 252);font: 700 12pt 'Nirmala UI';");
+                    });
+                }
+            }
+        }
+        else {
+            ui->renewpass->setStyleSheet("background-color: rgb(31, 41, 54);border: 1px solid rgb(224, 79, 95); border-radius: 10px;color: rgb(224, 79, 95);font: 700 12pt 'Nirmala UI';");
+            ui->newpass->setStyleSheet("background-color: rgb(31, 41, 54);border: 1px solid rgb(224, 79, 95); border-radius: 10px;color: rgb(224, 79, 95);font: 700 12pt 'Nirmala UI';");
+            QTimer::singleShot(2000, [this] {
+                ui->newpass->setStyleSheet("background-color: rgb(31, 41, 54);border: 1px solid rgb(104, 153, 252);border-radius: 10px;color: rgb(104, 153, 252);font: 700 12pt 'Nirmala UI';");
+                ui->renewpass->setStyleSheet("background-color: rgb(31, 41, 54);border: 1px solid rgb(104, 153, 252);border-radius: 10px;color: rgb(104, 153, 252);font: 700 12pt 'Nirmala UI';");
+            });
+        }
+    }
+}
+
+void PassControll::on_deleteaccButton_clicked() {
+    ui->stackedWidget_5->setCurrentIndex(1);
+}
+
+void PassControll::on_noDelButton_clicked() {
+    ui->stackedWidget_5->setCurrentIndex(0);
+}
+
+void PassControll::on_yesDelButton_clicked() {
+    QSqlQuery query(db);
+    QFileInfo load_profile(PROFILEPATH);
+    QFile f(PROFILEPATH);
+    QString val;
+
+    f.open(QIODevice::ReadOnly | QIODevice::Text);
+    val = f.readAll();
+    f.close();
+
+    QJsonDocument doc = QJsonDocument::fromJson(val.toUtf8());
+    QJsonObject json = doc.object();
+    QString load_id = json["id"].toString();
+
+    QString passValue = ui->passfordel->text();
+    QByteArray passByte = passValue.toUtf8();
+    QString hashedPass = QCryptographicHash::hash(passByte, QCryptographicHash::Sha256).toHex();
+
+    if (passValue == "") {
+        QString place = ui->passfordel->placeholderText();
+        ui->passfordel->setPlaceholderText("fill in the blank");
+        QTimer::singleShot(2000, [this, place] {
+            ui->passfordel->setPlaceholderText(place);
+        });
+    }
+    else {
+        query.exec("SELECT user_password FROM users WHERE user_id =\'" + load_id + "\'");
+        while (query.next()) {
+            QString pass = query.value(0).toString();
+            if (pass == hashedPass) {
+                qDebug() << hashedPass;
+                if(query.exec("DELETE FROM users WHERE user_password =\'" + hashedPass + "\' AND user_id =\'" + load_id + "\'")) {
+                    f.remove();
+                    MainWindow *w = new MainWindow;
+                    this->close();
+                    w->show();
+                }
+                else {
+                    QString tex = ui->passfordel->text();
+                    QString place = ui->passfordel->placeholderText();
+                    ui->passfordel->clear();
+                    ui->passfordel->setPlaceholderText("Some error overhead request!");
+                    QTimer::singleShot(2000, [this, place, tex] {
+                        ui->passfordel->setPlaceholderText(place);
+                        ui->passfordel->setText(tex);
+                    });
+                }
+            }
+            else {
+                QString tex = ui->passfordel->text();
+                QString place = ui->passfordel->placeholderText();
+                ui->passfordel->clear();
+                ui->passfordel->setPlaceholderText("Wrong password!");
+                QTimer::singleShot(2000, [this, place, tex] {
+                    ui->passfordel->setPlaceholderText(place);
+                    ui->passfordel->setText(tex);
+                });
             }
         }
     }

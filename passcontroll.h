@@ -39,7 +39,7 @@ private:
 
     QPoint curs;
     QPoint new_curs;
-    QString PROFILEPATH = "C:\\VivaPassLock\\profile\\profile.json";
+    QString PROFILEPATH = "C:\\NextPass\\profile\\profile.json";
 
 public slots:
     void on_closeButton_clicked();
@@ -59,6 +59,11 @@ public slots:
     void on_addNotesButton_clicked();
     void on_addsaveButton_2_clicked();
     void on_updateNotesButton_clicked();
+    void on_settingsButton_clicked();
+    void on_changeButton_clicked();
+    void on_deleteaccButton_clicked();
+    void on_noDelButton_clicked();
+    void on_yesDelButton_clicked();
 
 private slots:
     void on_passEdit_returnPressed();

@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>VivaPassLock</string>
+   <string>NextPass</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: rgb(23, 33, 43);
@@ -69,9 +69,9 @@ border-radius: 30px;</string>
       <widget class="QLabel" name="label_2">
        <property name="geometry">
         <rect>
-         <x>210</x>
+         <x>250</x>
          <y>200</y>
-         <width>151</width>
+         <width>71</width>
          <height>41</height>
         </rect>
        </property>
@@ -80,7 +80,7 @@ border-radius: 30px;</string>
 color: &quot;#30C193&quot;;</string>
        </property>
        <property name="text">
-        <string>PassLock</string>
+        <string>Pass</string>
        </property>
       </widget>
       <widget class="QPushButton" name="createButton">
@@ -104,9 +104,9 @@ border: none;</string>
       <widget class="QLabel" name="label_5">
        <property name="geometry">
         <rect>
-         <x>150</x>
+         <x>180</x>
          <y>200</y>
-         <width>61</width>
+         <width>71</width>
          <height>41</height>
         </rect>
        </property>
@@ -115,7 +115,7 @@ border: none;</string>
 color: rgb(141, 151, 173);</string>
        </property>
        <property name="text">
-        <string>Viva</string>
+        <string>Next</string>
        </property>
       </widget>
       <widget class="QPushButton" name="loginButton">

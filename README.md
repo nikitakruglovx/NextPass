@@ -1,4 +1,4 @@
-# VivaPassLock
+# NextPass
 ![version](https://img.shields.io/badge/version-1.0-blue)
 
 Minimalistic and convenient manager for storing your passwords and notes
